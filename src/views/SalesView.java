@@ -10,7 +10,6 @@ import static utils.Validator.*;
 
 public class SalesView {
 
-
     String title;
 
     protected Product model;
