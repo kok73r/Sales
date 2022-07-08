@@ -6,9 +6,7 @@ import base.Income;
 
 public class Product implements Income, Fiscal {
 
-
     private String name;
-
     private int quantity;
     private double price;
     private static final double RATE = 0.05;
@@ -33,7 +31,6 @@ public class Product implements Income, Fiscal {
     public double calculateIncome() {
         return quantity * price;
     }
-
 
     @Override
     public double calculateIncome(double income, double tax) {

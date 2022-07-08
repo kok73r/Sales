@@ -1,9 +1,10 @@
 package views;
 
-
 import models.Product;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import static utils.Validator.*;
 
@@ -11,9 +12,7 @@ import static utils.Validator.*;
 public class SalesView {
 
     String title;
-
     protected Product model;
-    Scanner scanner;
 
     public SalesView(Product model) {
         this.model = model;
@@ -21,20 +20,21 @@ public class SalesView {
 
     public void getInputs() {
 
-        scanner = new Scanner(System.in);
-        title = "Введите наименование товара: ";
-        System.out.println(title);
-        model.setName(validateName(scanner));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            title = "Введите наименование товара: ";
+            System.out.println(title);
+            model.setName(validateName(reader));
 
-        title = "Введите количество: ";
-        System.out.println(title);
-        model.setQuantity(validateQuantityInput(scanner));
+            title = "Введите количество: ";
+            System.out.println(title);
+            model.setQuantity(validateQuantityInput(reader));
 
-        title = "Введите цену: ";
-        System.out.println(title);
-        model.setPrice(validatePriceInput(scanner));
-
-        scanner.close();
+            title = "Введите цену: ";
+            System.out.println(title);
+            model.setPrice(validatePriceInput(reader));
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public void getOutput(String output) {
